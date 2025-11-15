@@ -596,7 +596,7 @@ rules:
       setTimeout(() => {
         // 打印 Base64 编码的 Clash YAML 内容到控制台
         console.log("Clash config Base64: " + encodedClashConfig);
-        fs.writeFileSync(subPath, encodedClashConfig); // 写入 Base64 编码的 Clash YAML
+        fs.writeFileSync(subPath, finalClashYaml); // 写入 Base64 编码的 Clash YAML
         console.log(`${FILE_PATH}/sub.txt saved successfully`);
         uploadNodes();
         
@@ -604,7 +604,7 @@ rules:
         app.get(`/${SUB_PATH}`, (req, res) => {
           // 直接返回已编码的 Clash 配置
           res.set('Content-Type', 'text/plain; charset=utf-8');
-          res.send(encodedClashConfig); // 返回 Base64 编码的 Clash YAML
+          res.send(finalClashYaml); // 返回 Base64 编码的 Clash YAML
         });
         resolve(finalClashYaml); // resolve 原始 YAML 文本
       }, 2000);
